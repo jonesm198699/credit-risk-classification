@@ -1,0 +1,42 @@
+## Overview of the Analysis
+
+
+Lending institutions provide loans or assets to borrowers with the expectation that they will repay the lender. Credit risk arises when the borrower fails to return the asset or repay the loan, resulting in financial losses for the lender. In this analysis, we aim to use machine learning to evaluate the creditworthiness of borrowers based on a dataset of historical lending activities obtained from a peer-to-peer lending services company.
+
+To achieve this, we employed a logistic regression algorithm to predict the likelihood of a target variable in classification problems. Specifically, we utilized the lending company's dataset to develop a logistic regression model, which yielded an accuracy score of 95%. However, the model's recall value for non-healthy loans was lower than that of healthy loans, indicating that the model is better at identifying healthy loans than non-healthy ones. This was largely due to the imbalanced nature of the dataset, where healthy loans significantly outnumbered non-healthy loans.
+
+In step 3 of the analysis, we split the dataset into training and testing sets and used the value_counts function to observe that the data was highly imbalanced, with the majority class being healthy loans (0) and the minority class being non-healthy loans (1).
+Based on the confusion matrix generated during step 3 of creating a LRM with original imbalanced data, the following results were obtained:
+
+* Among the 18,759 loan statuses labeled as healthy (low-risk), the model accurately predicted 18,679 as healthy and incorrectly predicted 80 as unhealthy.
+* Among the 625 loan statuses labeled as non-healthy (high-risk), the model correctly predicted 558 as non-healthy and incorrectly predicted 67 as healthy.
+
+One way to improve the accuracy score and enhance the model's ability to correctly classify non-healthy loans is by oversampling the data using the RandomOverSampler module from the imbalanced-learn library. This technique involves adding more instances of the minority class (non-healthy loans) to achieve a balanced dataset.
+
+By using the lending company's dataset, I developed a Logistic Regression Model that was trained on the oversampled data. This resulted in an accuracy score of 99%, which surpassed the accuracy score of the model trained on imbalanced data. The improved performance of the oversampled model can be attributed to the balanced nature of the dataset. Furthermore, the recall value for non-healthy loans increased from 0.91 to 0.99, indicating that the model excels at identifying and preventing errors such as mislabeling non-healthy (high-risk) loans as healthy (low-risk).
+
+Based on the confusion matrix obtained in step 3, the oversampled model accurately predicted 18,668 out of 18,759 healthy loans, while incorrectly identifying 91 healthy loans as non-healthy. For the 625 non-healthy loans in the dataset, the model correctly identified 623 loans as non-healthy, while incorrectly labeling 2 non-healthy loans as healthy.
+
+## Results
+
+The Logistic Regression Model was trained on the imbalanced dataset, and it accurately predicted healthy loans 100% of the time, but only predicted non-healthy loans with 87% accuracy.
+
+However, the imbalanced data model is more prone to making certain types of mistakes. For example, it is more likely to misclassify a healthy loan (low-risk) as a non-healthy loan (high-risk) or vice versa.
+
+The recall scores for this model indicate that it made mistakes in 1% of cases when predicting healthy loans and 9% of cases when predicting non-healthy loans.
+
+The Logistic Regression Model was trained on the balanced (oversampled) dataset, and it accurately predicted healthy loans 100% of the time, but only predicted non-healthy loans with 87% accuracy.
+
+However, the balanced (oversampled) data model has a significantly lower chance of making certain types of mistakes, such as misclassifying a healthy loan (low-risk) as a non-healthy loan (high-risk) or vice versa.
+
+Based on the recall scores, this model made mistakes in only 1% of cases when predicting both healthy loans and non-healthy loans.
+
+##Summary
+
+A lending company would ideally want a model that correctly classifies healthy and non-healthy loans most of the time, as misclassifying either type of loan can be costly. For example, misclassifying a healthy loan as non-healthy could result in the loss of customers, while misclassifying a non-healthy loan as healthy could lead to financial loss for the lender.
+
+The Logistic Regression Model trained on the balanced (oversampled) dataset performed better than the model trained on the imbalanced dataset, as it had a higher accuracy score and recall. This suggests that the model would make fewer mistakes when classifying non-healthy loans.
+
+The lending company would most likely prioritize reducing the number of false positives, as misclassifying healthy loans as non-healthy can lead to significant financial losses for the lender. In the confusion matrices provided, the number of false positives significantly decreased in the model trained on the balanced data, indicating that it would correctly classify healthy and non-healthy loans more often.
+
+Based on this analysis, I would recommend using the Logistic Regression Model trained on the balanced (oversampled) dataset (Model 2) for its better performance in correctly classifying both healthy and non-healthy loans.
